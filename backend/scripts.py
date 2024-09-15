@@ -1,46 +1,23 @@
-import urllib.parse,requests,os,tweepy
-import snscrape.modules.twitter as snstwitter
-import pandas as pd
-from dotenv import load_dotenv
-load_dotenv()
-#replace with user input 
-initial_prompt="Indian education system sucks"
-##must be less than 500 chars
-# auth=tweepy.OAuth1UserHandler(
-#     os.getenv("API_KEY"),
-#     os.getenv("API_KEY_SECRET"),
-#     os.getenv("ACCESS_TOKEN"),
-#     os.getenv("ACCESS_TOKEN_SECRET")
-# )
-# api=tweepy.API(auth)
-
-
-try:
-    scraper=snstwitter.TwitterSearchScraper(initial_prompt)
-#    response=requests.get(url,
-#    headers={})
-#    print(url)
-    tweets=[]
-    for i,tweet in enumerate(scraper.get_items()):
-
-        tweet_data=[
-        tweet.data,
-        tweet.id,
-        tweet.content,
-        tweet.user.username,
-        tweet.likeCount,
-        tweet.retweetCount
-        ]
-        tweets.append(tweet_data)
-        if i>50:
-            break
-
-    #response=api.search_tweets(q=encoded_prompt,lang='en',count=100)
-    print(len(tweets))
-    print(tweets[0])
-    
-
-except Exception as e:
-   print("Some error occoured in getting the tweets {e}".format(e=e))
-
-
+from ntscraper import Nitter
+scraper = Nitter(log_level=1,skip_instance_check=False)
+results=scraper.get_tweets("education",number=200,language='en')
+tweets=results['tweets']
+tweets.sort(reverse=True, key=lambda x:x['stats']['likes'])
+leaderboard=[]
+cumu_likes=dict()
+freq=dict()
+userwise_text=dict()
+for tweet in tweets:
+  if tweet['user']['username'] in freq:
+    freq[tweet['user']['username']]+=1
+    cumu_likes[tweet['user']['username']]+=tweet['stats']['likes']
+    userwise_text[tweet['user']['username']].append(tweet['text'])
+  else:
+    freq[tweet['user']['username']]=1
+    cumu_likes[tweet['user']['username']]=tweet['stats']['likes']
+    leaderboard.append(tweet['user']['username'])
+    userwise_text[tweet['user']['username']]=[]
+    userwise_text[tweet['user']['username']].append(tweet['text'])
+leaderboard.sort(reverse=True,key=lambda x:cumu_likes[x])
+ordered_text=[userwise_text[x] for x in leaderboard]
+#ordered_text is a LIST OF LIST OF strings ordered by likes ie the first list of list is to have the most imporatnce :)
