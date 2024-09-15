@@ -5,14 +5,15 @@ from sentimental_analysis import sentimental_analysis
 
 def script(query,mood):
     tweets=scrape_tweet(query)
+    print("these are the tweets",tweets)
     collections = {
         "positive": {},
         "negative": {},
         "neutral": {}
     }
     for tweet in tweets:
-        tokens=process_data(tweets)
-        for i in len(tokens):
+        tokens=process_data(tweet[0])
+        for i in range(len(tokens)):
             sentiment=sentimental_analysis(tokens[i])
             if sentiment=='POSITIVE':
                 collections['positive'][i]=tokens[i]
@@ -22,6 +23,6 @@ def script(query,mood):
                 collections['neutral'][i]=tokens[i]
 
     generated_tweet=generate_tweet(mood,collections[mood])
-    print(generated_tweet)
+    print("This is the generated tweet",generated_tweet)
 
 script("Education in India","negative")
