@@ -1,3 +1,4 @@
+from send_tweet import send_tweet
 from data_processing import process_data
 from generate_tweet import generate_tweet
 from scrape import scrape_tweet
@@ -24,5 +25,6 @@ def script(query,mood):
 
     generated_tweet=generate_tweet(mood,collections[mood],query)
     print("This is the generated tweet",generated_tweet)
+    send_tweet(generated_tweet)
 
 script("Education in India","negative")
