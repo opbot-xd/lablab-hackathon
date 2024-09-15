@@ -2,7 +2,7 @@ from ntscraper import Nitter
 
 def scrape_tweet(query):
     scraper = Nitter(log_level=1,skip_instance_check=False)
-    results=scraper.get_tweets("education",number=200,language='en')
+    results=scraper.get_tweets(query,number=200,language='en')
     tweets=results['tweets']
     tweets.sort(reverse=True, key=lambda x:x['stats']['likes'])
     leaderboard=[]
