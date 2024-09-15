@@ -33,7 +33,7 @@ def script(query,mood,uuid):
             else:
                 collections['neutral'][i]=tokens[i]
 
-    generated_tweet=generate_tweet(mood,collections[mood])
+    generated_tweet=generate_tweet(mood,collections[mood],query)
     print("This is the generated tweet",generated_tweet)
     supabase_client.table("tweets").update({
         "tweet": generated_tweet,
