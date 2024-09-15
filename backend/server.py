@@ -1,13 +1,16 @@
 from flask import Flask, request, jsonify
-import datetime
 import uuid
 import threading
 from supabase import create_client
 from script import script
 from dotenv import load_dotenv
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
+
+# Enable CORS for all routes
+CORS(app)
 
 load_dotenv()
 
