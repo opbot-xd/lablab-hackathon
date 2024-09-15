@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from send_tweet import send_tweet
 from supabase import create_client
 from data_processing import process_data
 from generate_tweet import generate_tweet
@@ -35,6 +36,8 @@ def script(query,mood,uuid):
 
     generated_tweet=generate_tweet(mood,collections[mood],query)
     print("This is the generated tweet",generated_tweet)
+    send_tweet(generated_tweet)
+
     supabase_client.table("tweets").update({
         "tweet": generated_tweet,
         "pending": False
