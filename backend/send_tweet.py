@@ -10,5 +10,4 @@ client=tweepy.Client(
 
 def send_tweet(tweet):
     client.create_tweet(text=tweet)
-send_tweet("TEST tweet 1")
 
