@@ -5,10 +5,15 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer,WordNetLemmatizer
 
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
 def process_data(tweet):
+    nltk.download('punkt')
+    nltk.download('punkt_tab')
+    nltk.download('stopwords')
+    nltk.download('wordnet')
     tweet=re.sub(r'http\S+|www\S+|https\S+','',tweet,flags=re.MULTILINE)
     tweet=re.sub(r'@\w+','',tweet)
     tweet=re.sub(r'[^\w\s]','',tweet)
