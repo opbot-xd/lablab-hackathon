@@ -1,7 +1,12 @@
 import re
+import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer,WordNetLemmatizer
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 def process_data(tweet):
     tweet=re.sub(r'http\S+|www\S+|https\S+','',tweet,flags=re.MULTILINE)
