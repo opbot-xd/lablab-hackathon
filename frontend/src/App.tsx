@@ -37,7 +37,7 @@ export default function App() {
 
   const handleFormSubmit = async () => {
     try {
-      const response = await axios.post<PostResponse>("http://localhost:5000/get_data", {
+      const response = await axios.post<PostResponse>("https://lablab-hackathon.onrender.com/get_data", {
         tweet: hashtag,
         mood: mood,
       });
@@ -52,7 +52,7 @@ export default function App() {
     if (uuid && pending) {
       interval = setInterval(async () => {
         try {
-          const response = await axios.get<GetResponse>("http://localhost:5000/status", {
+          const response = await axios.get<GetResponse>("https://lablab-hackathon.onrender.com/status", {
             headers: {
               uuid: uuid,
             },

@@ -1,0 +1,3 @@
+<h1>TWITTER FAME AUTOMATOR BOT</h1>
+
+We have created a bot to automate the rise to twitter fame all you need to do is input the topic and the tone of the tweet on our frontend built on react and depending upon it, the bot scrapes existing tweets on similar topics, and then tokenizes these tweets and performs sentiment analysis on them. Then it extracts the keywords representing a particular sentiment and on the basis of their frequency and popularity of the original tweets it utilizes llms namely Gemini to generate a new tweet with a high probability of going viral. We have also automated the posting of the tweet via the Twitter API, so select a topic and the tone of tweet and you are done! Sit back, relax and enjoy your rise to twitter fame.
