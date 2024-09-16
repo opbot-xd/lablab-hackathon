@@ -16,6 +16,7 @@ supabase_client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
 def script(query,mood,uuid):
+    mood=mood.lower()
     tweets=scrape_tweet(query)
     print("these are the tweets",tweets)
     collections = {
